@@ -4,9 +4,6 @@ import requests
 import re
 import os
 
-PORT = int(os.environ.get('PORT', 5000))
-sss = os.environ["TOKEN"]
-
 def hello(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(f'Hello {update.effective_user.first_name}')
 
