@@ -69,7 +69,7 @@ def main():
                           port=PORT,
                           url_path=TOKEN,
                           webhook_url="https://obilarbot.herokuapp.com/" + TOKEN)
-
+    updater.start_polling()
     updater.idle()
 
 if __name__ == '__main__':
