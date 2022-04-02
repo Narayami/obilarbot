@@ -4,6 +4,9 @@ import requests
 import re
 import os
 
+PORT = int(os.environ.get('PORT', 5000))
+TOKEN = '5137857279:AAGEWytqKXAhMU2iHFeO4U_7zDAucNyU1OE'
+
 def hello(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(f'Hello {update.effective_user.first_name}')
 
@@ -56,14 +59,24 @@ def poko(update, context):
   context.bot.send_photo(chat_id, 'https://imgur.com/LQ0uiwX')
 #-------END CUSTOM---------
 
-updater.dispatcher.add_handler(CommandHandler('hello', hello))
-updater.dispatcher.add_handler(CommandHandler('dog', dog))
-updater.dispatcher.add_handler(CommandHandler('zatcho', zatcho))
-updater.dispatcher.add_handler(CommandHandler('snake', snake))
-updater.dispatcher.add_handler(CommandHandler('cordy', cordy))
-updater.dispatcher.add_handler(CommandHandler('chubakamos', chubakamos))
-updater.dispatcher.add_handler(CommandHandler('elguaranapo', elguaranapo))
-updater.dispatcher.add_handler(CommandHandler('poko', poko))
+def main():
+    updater.dispatcher.add_handler(CommandHandler('hello', hello))
+    updater.dispatcher.add_handler(CommandHandler('dog', dog))
+    updater.dispatcher.add_handler(CommandHandler('zatcho', zatcho))
+    updater.dispatcher.add_handler(CommandHandler('snake', snake))
+    updater.dispatcher.add_handler(CommandHandler('cordy', cordy))
+    updater.dispatcher.add_handler(CommandHandler('chubakamos', chubakamos))
+    updater.dispatcher.add_handler(CommandHandler('elguaranapo', elguaranapo))
+    updater.dispatcher.add_handler(CommandHandler('poko', poko))
 
-updater.start_polling()
-updater.idle()
+    #old
+    #updater.start_polling()
+    #new
+    updater.start_webhook(listen="0.0.0.0",
+                          port=int(PORT),
+                          url_path=TOKEN)
+    updater.bot.setWebhook('https://obilarbot.herokuapp.com/' + TOKEN)
+    updater.idle()
+
+if __name__ == '__main__':
+    main()
