@@ -1,11 +1,13 @@
+from lib2to3.pgen2 import token
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext, InlineQueryHandler
 import requests
 import re
 import os
 
-PORT = int(os.environ.get('PORT', 5000))
+PORT = int(os.environ.get('PORT', 8443))
 TOKEN = '5137857279:AAGEWytqKXAhMU2iHFeO4U_7zDAucNyU1OE'
+#updater = Updater(token)
 
 def hello(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(f'Hello {update.effective_user.first_name}')
@@ -73,9 +75,10 @@ def main():
     #updater.start_polling()
     #new
     updater.start_webhook(listen="0.0.0.0",
-                          port=int(PORT),
-                          url_path=TOKEN)
-    updater.bot.setWebhook('https://obilarbot.herokuapp.com/' + TOKEN)
+                          port=PORT,
+                          url_path="5137857279:AAGEWytqKXAhMU2iHFeO4U_7zDAucNyU1OE",
+                          webhook_url="https://obilarbot.herokuapp.com/" + TOKEN)
+
     updater.idle()
 
 if __name__ == '__main__':
