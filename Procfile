@@ -1,1 +1,1 @@
-web: py obilarbot.py
+web: python3 obilarbot.py

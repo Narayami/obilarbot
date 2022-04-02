@@ -7,14 +7,11 @@ import os
 
 PORT = int(os.environ.get('PORT', 8443))
 TOKEN = '5137857279:AAGEWytqKXAhMU2iHFeO4U_7zDAucNyU1OE'
-#updater = Updater(token)
+updater = Updater(TOKEN)
 
 def hello(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(f'Hello {update.effective_user.first_name}')
 
-updater = Updater('5137857279:AAGEWytqKXAhMU2iHFeO4U_7zDAucNyU1OE')
-
-#---RANDOM DOGS
 def get_url():
     contents = requests.get('https://random.dog/woof.json').json()
     image_url = contents['url']
@@ -38,28 +35,25 @@ def dog(update, context):
     url = get_url()
     chat_id = update.message.chat_id
     context.bot.send_photo(chat_id=chat_id, photo=url)
-#END RANDOM
 
-#----CUSTOM----
 def zatcho(update, context):    
-  chat_id = update.message.chat_id
-  context.bot.send_photo(chat_id, 'https://imgur.com/Pbtrt1V')
+    chat_id = update.message.chat_id
+    context.bot.send_photo(chat_id, 'https://imgur.com/Pbtrt1V')
 def snake(update, context):    
-  chat_id = update.message.chat_id
-  context.bot.send_photo(chat_id, 'https://imgur.com/BmQrayJ')
+    chat_id = update.message.chat_id
+    context.bot.send_photo(chat_id, 'https://imgur.com/BmQrayJ')
 def cordy(update, context):    
-  chat_id = update.message.chat_id
-  context.bot.send_photo(chat_id, 'https://imgur.com/rjZwCbv')
+    chat_id = update.message.chat_id
+    context.bot.send_photo(chat_id, 'https://imgur.com/rjZwCbv')
 def chubakamos(update, context):    
-  chat_id = update.message.chat_id
-  context.bot.send_photo(chat_id, 'https://imgur.com/B3Ydqe8')
+    chat_id = update.message.chat_id
+    context.bot.send_photo(chat_id, 'https://imgur.com/B3Ydqe8')
 def elguaranapo(update, context):    
-  chat_id = update.message.chat_id
-  context.bot.send_photo(chat_id, 'https://imgur.com/q8YFtb8')
+    chat_id = update.message.chat_id
+    context.bot.send_photo(chat_id, 'https://imgur.com/q8YFtb8')
 def poko(update, context):    
-  chat_id = update.message.chat_id
-  context.bot.send_photo(chat_id, 'https://imgur.com/LQ0uiwX')
-#-------END CUSTOM---------
+    chat_id = update.message.chat_id
+    context.bot.send_photo(chat_id, 'https://imgur.com/LQ0uiwX')
 
 def main():
     updater.dispatcher.add_handler(CommandHandler('hello', hello))
@@ -71,12 +65,9 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('elguaranapo', elguaranapo))
     updater.dispatcher.add_handler(CommandHandler('poko', poko))
 
-    #old
-    #updater.start_polling()
-    #new
     updater.start_webhook(listen="0.0.0.0",
                           port=PORT,
-                          url_path="5137857279:AAGEWytqKXAhMU2iHFeO4U_7zDAucNyU1OE",
+                          url_path=TOKEN,
                           webhook_url="https://obilarbot.herokuapp.com/" + TOKEN)
 
     updater.idle()
